@@ -1,0 +1,61 @@
+---
+apiVersion: "camel.apache.org/v1"
+kind: "Integration"
+metadata:
+  labels:
+    jetic.io/deployment.uuid: "4d08f1f8-81a5-445a-bfa0-6e5ef261816a"
+    jetic.io/integration.name: "Configmap-and-Cache"
+    jetic.io/integration.uuid: "edbfa663-7eb5-495a-bcb8-0d94415aa40f"
+    jetic.io/log.level: "INFO"
+    jetic.io/data.analyzer: "true"
+    jetic.io/profile.name: "Default"
+    jetic.io/profile.uuid: "390d4a43-78b8-4f5e-a599-4a6b67bc6e9c"
+  name: "configmap-and-cache"
+spec:
+  configuration:
+  - type: "property"
+    value: "quarkus.log.console.color=true"
+  - type: "property"
+    value: "quarkus.log.console.level=INFO"
+  dependencies:
+  - "mvn:io.jetic.analyzer:jetic-analyzer:2.2.4"
+  replicas: 1
+  resources: []
+  sources:
+  - compression: false
+    content: |+
+      //
+      // To run this integration use:
+      //
+      // kamel run Configmap_and_Cache.groovy
+      //
+
+      // camel-k: language=groovy
+      // camel-k: name=Configmap-and-Cache
+
+      import io.jetic.analyzer.JeticAnalyzer
+
+      // activate JETIC.IO Data Analyzer
+      JeticAnalyzer.activate(getContext())
+
+    name: "Configmap-and-Cache.groovy"
+  traits:
+    jolokia:
+      configuration:
+        enabled: true
+    logging:
+      configuration:
+        enabled: true
+        level: "DEBUG"
+    owner:
+      configuration:
+        enabled: true
+        targetLabels:
+        - "jetic.io/data.analyzer"
+        - "jetic.io/deployment.uuid"
+        - "jetic.io/integration.name"
+        - "jetic.io/integration.uuid"
+        - "jetic.io/log.level"
+        - "jetic.io/open.api.host"
+        - "jetic.io/profile.name"
+        - "jetic.io/profile.uuid"

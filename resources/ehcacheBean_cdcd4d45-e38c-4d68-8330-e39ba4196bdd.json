@@ -1,0 +1,14 @@
+{
+  "type" : "SOURCE_DEFINITIONS",
+  "properties" : {
+    "content" : "import org.apache.camel.BindToRegistry;\nimport org.apache.camel.builder.RouteBuilder;\nimport org.apache.camel.component.ehcache.EhcacheComponent;\nimport org.ehcache.config.builders.CacheManagerBuilder;\nimport org.ehcache.config.builders.ResourcePoolsBuilder;\nimport org.ehcache.xml.XmlConfiguration;\nimport org.ehcache.config.builders.CacheManagerBuilder;\nimport org.ehcache.CacheManager;\nimport org.ehcache.config.builders.CacheConfigurationBuilder;\n\nimport java.io.IOException;\nimport java.net.URL;\nimport java.io.File;\n\npublic class EhcacheConfigurationBean extends RouteBuilder {\n\n    @BindToRegistry(\"ehcache\")\n    public EhcacheComponent createEhcacheComponent() {\n        EhcacheComponent ehcacheComponent = new EhcacheComponent();\n        ehcacheComponent.setCacheManager(createCacheManager());\n        return ehcacheComponent;\n    }\n\n    @Override\n    public void configure() throws Exception {}\n\n    private org.ehcache.CacheManager createCacheManager() {\n        return CacheManagerBuilder.newCacheManagerBuilder()\n                .withCache(\"default\",\n                        CacheConfigurationBuilder.newCacheConfigurationBuilder(\n                                String.class, Object.class,\n                                ResourcePoolsBuilder.heap(1000))\n                )\n                .withCache(\"userinfo\",\n                        CacheConfigurationBuilder.newCacheConfigurationBuilder(\n                                String.class, String.class,\n                                ResourcePoolsBuilder.heap(500))\n                )\n                .build(true);\n    }\n}\n",
+    "filename" : "EhcacheConfigurationBean.java"
+  },
+  "id" : "cdcd4d45-e38c-4d68-8330-e39ba4196bdd",
+  "name" : "ehcacheBean",
+  "description" : "ehcache Bean",
+  "createdAt" : "2024-08-12T16:29:08.698323757",
+  "updatedAt" : "2024-08-12T16:29:27.275069511",
+  "createdBy" : "b52b7118-02ac-401a-afb7-5cf0cea3083f",
+  "updatedBy" : "b52b7118-02ac-401a-afb7-5cf0cea3083f"
+}

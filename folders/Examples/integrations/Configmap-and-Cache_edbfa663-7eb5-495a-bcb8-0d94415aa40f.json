@@ -1,0 +1,435 @@
+{
+  "revision" : 1,
+  "compression" : false,
+  "dataAnalyzer" : true,
+  "replicas" : 1,
+  "openApiUuid" : null,
+  "currentProfileUuid" : "1b6380ca-11cb-483f-96f0-a904313f61ee",
+  "parameterGroupUuids" : [ ],
+  "repoResourceUuids" : [ "cdcd4d45-e38c-4d68-8330-e39ba4196bdd", "ba201976-327b-477e-989e-35aa64582534" ],
+  "routeDefinitions" : [ {
+    "id" : 1,
+    "camelRouteId" : "route-1",
+    "enabled" : true,
+    "routeId" : 1,
+    "route" : [ {
+      "name" : "timer",
+      "nodeId" : "timer: 00",
+      "description" : "",
+      "properties" : {
+        "_type" : "timer",
+        "active" : true,
+        "advancedParameters" : [ ],
+        "camelGroup" : "scheduled trigger",
+        "daemon" : true,
+        "delay" : "1000",
+        "fixedRate" : false,
+        "name" : "timer",
+        "period" : "1000",
+        "repeatCount" : "1",
+        "setScheduleTime" : false,
+        "time" : "2021-12-31 00:00:00",
+        "timerName" : "timer",
+        "url" : ""
+      },
+      "_type" : "timer",
+      "isNotActive" : false
+    }, {
+      "name" : "log",
+      "nodeId" : "log: 00",
+      "description" : "",
+      "properties" : {
+        "_type" : "log",
+        "active" : true,
+        "advancedParameters" : [ ],
+        "camelGroup" : "core feature",
+        "level" : "INFO",
+        "logType" : "EIP",
+        "loggerName" : "log",
+        "message" : "Pulling Configmap and Secret",
+        "multiline" : false,
+        "name" : "log",
+        "showAll" : false,
+        "showBody" : true,
+        "showBodyType" : true,
+        "showCaughtException" : false,
+        "showExchangeId" : false,
+        "showHeaders" : false,
+        "showProperties" : false,
+        "showStackTrace" : false,
+        "toDynamicEndpoint" : false,
+        "url" : ""
+      },
+      "_type" : "log",
+      "isNotActive" : false
+    }, {
+      "name" : "log",
+      "nodeId" : "log: 01",
+      "description" : "",
+      "properties" : {
+        "_type" : "log",
+        "active" : true,
+        "advancedParameters" : [ ],
+        "camelGroup" : "core feature",
+        "level" : "INFO",
+        "logType" : "EIP",
+        "loggerName" : "log",
+        "message" : "Configs: {{configmap:user-config/id}} - {{configmap:user-config/name}} - {{configmap:user-config/email}}",
+        "multiline" : false,
+        "name" : "log",
+        "showAll" : false,
+        "showBody" : true,
+        "showBodyType" : true,
+        "showCaughtException" : false,
+        "showExchangeId" : false,
+        "showHeaders" : false,
+        "showProperties" : false,
+        "showStackTrace" : false,
+        "toDynamicEndpoint" : false,
+        "url" : ""
+      },
+      "_type" : "log",
+      "isNotActive" : false
+    }, {
+      "name" : "setBody",
+      "nodeId" : "setBody: 00",
+      "description" : "",
+      "properties" : {
+        "_type" : "setBody",
+        "active" : true,
+        "addNamespaces" : false,
+        "camelGroup" : "core feature",
+        "expression" : "Secrets: {{secret:user-secret/username}} - {{secret:user-secret/password}}",
+        "language" : "Simple",
+        "name" : "setBody",
+        "namespaces" : [ ],
+        "suppressExceptions" : false,
+        "url" : ""
+      },
+      "_type" : "setBody",
+      "isNotActive" : false
+    }, {
+      "name" : "log",
+      "nodeId" : "log: 02",
+      "description" : "",
+      "properties" : {
+        "_type" : "log",
+        "active" : true,
+        "advancedParameters" : [ ],
+        "camelGroup" : "core feature",
+        "level" : "INFO",
+        "logType" : "EIP",
+        "loggerName" : "log",
+        "message" : "${body}",
+        "multiline" : false,
+        "name" : "log",
+        "showAll" : false,
+        "showBody" : true,
+        "showBodyType" : true,
+        "showCaughtException" : false,
+        "showExchangeId" : false,
+        "showHeaders" : false,
+        "showProperties" : false,
+        "showStackTrace" : false,
+        "toDynamicEndpoint" : false,
+        "url" : ""
+      },
+      "_type" : "log",
+      "isNotActive" : false
+    }, {
+      "name" : "setHeaders",
+      "nodeId" : "setHeaders: 00",
+      "description" : "",
+      "properties" : {
+        "_type" : "setHeaders",
+        "active" : true,
+        "addNamespaces" : false,
+        "camelGroup" : "core feature",
+        "headerList" : [ {
+          "headerName" : "CamelEhcacheKey",
+          "headerValue" : "credentials",
+          "language" : "Constant",
+          "uuid" : "7026a6c1-b5cc-448e-a45a-6a4d08d612de"
+        }, {
+          "headerName" : "CamelEhcacheValue",
+          "headerValue" : "${body}",
+          "language" : "Simple",
+          "uuid" : "3a3fc180-0326-43b7-b2e1-65d73fda9444"
+        }, {
+          "headerName" : "CamelEhcacheAction",
+          "headerValue" : "PUT",
+          "language" : "Constant",
+          "uuid" : "5ce60891-70c3-4b83-a060-494b6f8e5a79"
+        } ],
+        "name" : "setHeaders",
+        "namespaces" : [ ],
+        "suppressExceptions" : false,
+        "url" : ""
+      },
+      "_type" : "setHeaders",
+      "isNotActive" : false
+    }, {
+      "name" : "ehcache",
+      "nodeId" : "ehcache: 00",
+      "description" : "",
+      "properties" : {
+        "_type" : "ehcache",
+        "action" : "PUT",
+        "active" : true,
+        "advancedParameters" : [ ],
+        "bridgeErrorHandler" : false,
+        "cacheName" : "default",
+        "camelGroup" : "miscellaneous connector",
+        "configurationUri" : "",
+        "createCacheIfNotExist" : true,
+        "eventTypes" : "",
+        "keyType" : "java.lang.String",
+        "lazyStartProducer" : false,
+        "name" : "ehcache",
+        "toDynamicEndpoint" : false,
+        "url" : "",
+        "valueType" : "java.lang.Object"
+      },
+      "_type" : "ehcache",
+      "isNotActive" : false
+    } ]
+  }, {
+    "id" : 2,
+    "camelRouteId" : "route-2",
+    "enabled" : true,
+    "routeId" : 2,
+    "route" : [ {
+      "name" : "timer",
+      "nodeId" : "timer: 01",
+      "description" : "",
+      "properties" : {
+        "_type" : "timer",
+        "active" : true,
+        "advancedParameters" : [ ],
+        "camelGroup" : "scheduled trigger",
+        "daemon" : true,
+        "delay" : "10000",
+        "fixedRate" : false,
+        "name" : "timer",
+        "period" : "5000",
+        "repeatCount" : "5",
+        "setScheduleTime" : false,
+        "time" : "2021-12-31 00:00:00",
+        "timerName" : "timer",
+        "url" : ""
+      },
+      "_type" : "timer",
+      "isNotActive" : false
+    }, {
+      "name" : "setHeaders",
+      "nodeId" : "setHeaders: 01",
+      "description" : "",
+      "properties" : {
+        "_type" : "setHeaders",
+        "active" : true,
+        "addNamespaces" : false,
+        "camelGroup" : "core feature",
+        "headerList" : [ {
+          "headerName" : "CamelEhcacheKey",
+          "headerValue" : "credentials",
+          "language" : "Constant",
+          "uuid" : "9bd7129e-1577-4583-80ed-8dc4517f1ef7"
+        }, {
+          "headerName" : "CamelEhcacheAction",
+          "headerValue" : "GET",
+          "language" : "Constant",
+          "uuid" : "84e5756e-8b2d-447d-8edd-7be2246866e7"
+        } ],
+        "name" : "setHeaders",
+        "namespaces" : [ ],
+        "suppressExceptions" : false,
+        "url" : ""
+      },
+      "_type" : "setHeaders",
+      "isNotActive" : false
+    }, {
+      "name" : "ehcache",
+      "nodeId" : "ehcache: 01",
+      "description" : "",
+      "properties" : {
+        "_type" : "ehcache",
+        "action" : "GET",
+        "active" : true,
+        "advancedParameters" : [ ],
+        "bridgeErrorHandler" : false,
+        "cacheName" : "default",
+        "camelGroup" : "miscellaneous connector",
+        "configurationUri" : "",
+        "createCacheIfNotExist" : true,
+        "eventTypes" : "",
+        "keyType" : "java.lang.String",
+        "lazyStartProducer" : false,
+        "name" : "ehcache",
+        "toDynamicEndpoint" : false,
+        "url" : "",
+        "valueType" : "java.lang.Object"
+      },
+      "_type" : "ehcache",
+      "isNotActive" : false
+    }, {
+      "name" : "log",
+      "nodeId" : "log: 03",
+      "description" : "",
+      "properties" : {
+        "_type" : "log",
+        "active" : true,
+        "advancedParameters" : [ ],
+        "camelGroup" : "core feature",
+        "level" : "INFO",
+        "logType" : "EIP",
+        "loggerName" : "log",
+        "message" : "Cached: ${body}",
+        "multiline" : false,
+        "name" : "log",
+        "showAll" : false,
+        "showBody" : true,
+        "showBodyType" : true,
+        "showCaughtException" : false,
+        "showExchangeId" : false,
+        "showHeaders" : false,
+        "showProperties" : false,
+        "showStackTrace" : false,
+        "toDynamicEndpoint" : false,
+        "url" : ""
+      },
+      "_type" : "log",
+      "isNotActive" : false
+    } ]
+  }, {
+    "id" : 3,
+    "camelRouteId" : "route-3",
+    "enabled" : true,
+    "routeId" : 3,
+    "route" : [ {
+      "name" : "timer",
+      "nodeId" : "timer: 02",
+      "description" : "",
+      "properties" : {
+        "_type" : "timer",
+        "active" : true,
+        "advancedParameters" : [ ],
+        "camelGroup" : "scheduled trigger",
+        "daemon" : true,
+        "delay" : "15000",
+        "fixedRate" : false,
+        "name" : "timer",
+        "period" : "1000",
+        "repeatCount" : "1",
+        "setScheduleTime" : false,
+        "time" : "2021-12-31 00:00:00",
+        "timerName" : "timer",
+        "url" : ""
+      },
+      "_type" : "timer",
+      "isNotActive" : false
+    }, {
+      "name" : "log",
+      "nodeId" : "log: 04",
+      "description" : "",
+      "properties" : {
+        "_type" : "log",
+        "active" : true,
+        "advancedParameters" : [ ],
+        "camelGroup" : "core feature",
+        "level" : "INFO",
+        "logType" : "EIP",
+        "loggerName" : "log",
+        "message" : "Clearing Cache",
+        "multiline" : false,
+        "name" : "log",
+        "showAll" : false,
+        "showBody" : true,
+        "showBodyType" : true,
+        "showCaughtException" : false,
+        "showExchangeId" : false,
+        "showHeaders" : false,
+        "showProperties" : false,
+        "showStackTrace" : false,
+        "toDynamicEndpoint" : false,
+        "url" : ""
+      },
+      "_type" : "log",
+      "isNotActive" : false
+    }, {
+      "name" : "setHeaders",
+      "nodeId" : "setHeaders: 02",
+      "description" : "",
+      "properties" : {
+        "_type" : "setHeaders",
+        "active" : true,
+        "addNamespaces" : false,
+        "camelGroup" : "core feature",
+        "headerList" : [ {
+          "headerName" : "CamelEhcacheKey",
+          "headerValue" : "credentials",
+          "language" : "Constant",
+          "uuid" : "9bd7129e-1577-4583-80ed-8dc4517f1ef7"
+        }, {
+          "headerName" : "CamelEhcacheAction",
+          "headerValue" : "CLEAR",
+          "language" : "Constant",
+          "uuid" : "84e5756e-8b2d-447d-8edd-7be2246866e7"
+        } ],
+        "name" : "setHeaders",
+        "namespaces" : [ ],
+        "suppressExceptions" : false,
+        "url" : ""
+      },
+      "_type" : "setHeaders",
+      "isNotActive" : false
+    }, {
+      "name" : "ehcache",
+      "nodeId" : "ehcache: 02",
+      "description" : "",
+      "properties" : {
+        "_type" : "ehcache",
+        "action" : "CLEAR",
+        "active" : true,
+        "advancedParameters" : [ ],
+        "bridgeErrorHandler" : false,
+        "cacheName" : "default",
+        "camelGroup" : "miscellaneous connector",
+        "configurationUri" : "",
+        "createCacheIfNotExist" : true,
+        "eventTypes" : "",
+        "keyType" : "java.lang.String",
+        "lazyStartProducer" : false,
+        "name" : "ehcache",
+        "toDynamicEndpoint" : false,
+        "url" : "",
+        "valueType" : "java.lang.Object"
+      },
+      "_type" : "ehcache",
+      "isNotActive" : false
+    } ]
+  } ],
+  "traits" : [ {
+    "name" : "camel",
+    "configuration" : {
+      "enabled" : true,
+      "properties" : [ "camel.kubernetes-config.mount-path-secrets = /etc/camel/conf.d/_secrets", "camel.kubernetes-config.mount-path-configmaps = /etc/camel/conf.d/_configmaps" ]
+    }
+  }, {
+    "name" : "mount",
+    "configuration" : {
+      "configs" : [ "secret:user-secret", "configmap:user-config" ],
+      "enabled" : true
+    }
+  } ],
+  "id" : "edbfa663-7eb5-495a-bcb8-0d94415aa40f",
+  "name" : "Configmap-and-Cache",
+  "description" : "",
+  "absolutePath" : "/var/git-jetic/b52b7118-02ac-401a-afb7-5cf0cea3083f/635c9f05-3fb7-436d-ba0b-eb9024c86357/folders/Examples/integrations/Configmap-and-Cache_edbfa663-7eb5-495a-bcb8-0d94415aa40f.json",
+  "fileName" : "Configmap-and-Cache_edbfa663-7eb5-495a-bcb8-0d94415aa40f.json",
+  "folderName" : "Examples",
+  "repoUuid" : "635c9f05-3fb7-436d-ba0b-eb9024c86357",
+  "createdAt" : "2024-08-12T16:10:44.075900442",
+  "updatedAt" : "2024-08-12T16:10:44.07590094",
+  "createdBy" : "b52b7118-02ac-401a-afb7-5cf0cea3083f",
+  "updatedBy" : "b52b7118-02ac-401a-afb7-5cf0cea3083f"
+}
